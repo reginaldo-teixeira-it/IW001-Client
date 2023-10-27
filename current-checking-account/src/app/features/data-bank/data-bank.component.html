@@ -1,0 +1,77 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+
+    <mat-card>
+      <mat-card-content>
+        <h2>Data Bank</h2>
+        <mat-card-header>
+          <mat-form-field>
+              <input matInput (keyup)="SearchFilter($event)" placeholder="Search.." />
+          </mat-form-field>
+
+          <!--
+          <div class="flex" style="padding-left: 85.60%;">
+            <button style="padding: 0%;width: 220px;" mat-raised-button color="primary"> Create release (+)</button>
+          </div> -->
+        </mat-card-header>
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <!-- Position ID -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="startdate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
+            <td mat-cell *matCellDef="let element"> {{element.startdate}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="value">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
+            <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="loose">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Avulso </th>
+            <td mat-cell *matCellDef="let element"> {{element.loose}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="state">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Státus </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.state ? 'Válido' : 'Cancelado' }}
+              </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Ação </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">
+
+              <button (click)="update(element.id)" mat-icon-button color="primary" matTooltip="Edit" aria-label="Example icon button with a home icon">
+                <mat-icon>edit_note</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" matTooltip="Cancel" aria-label="Example icon button with a menu icon">
+                <mat-icon>cancel</mat-icon>
+              </button>
+              <!-- <button mat-icon-button color="warn" matTooltip="Remove" aria-label="Example icon button with a menu icon">
+                <mat-icon>delete</mat-icon>
+              </button> -->
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-card-content>
+      <mat-card-footer>
+        <mat-paginator [pageSizeOptions]="[5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100]" showFirstLastButtons> </mat-paginator>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>
