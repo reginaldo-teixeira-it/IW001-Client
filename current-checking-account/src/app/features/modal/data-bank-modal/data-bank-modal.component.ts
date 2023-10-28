@@ -13,6 +13,7 @@ import { DataBankModel } from 'src/app/core/models';
 export class DataBankModalComponent implements OnInit {
   inputdata: any;
   editdata: any;
+  isStatusDisabled: boolean = false;
   closemessage = 'closed using directive'
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref: MatDialogRef<DataBankModalComponent>, private buildr: FormBuilder,
     private service: DataBankService) {
@@ -37,7 +38,7 @@ export class DataBankModalComponent implements OnInit {
         startdate: this.editdata.startDate,
         value: this.editdata.value,
         loose: this.editdata.loose,
-        state: this.editdata.state,
+        state: this.editdata.state.toString(),
       })
     });
   }
@@ -53,7 +54,7 @@ export class DataBankModalComponent implements OnInit {
     value: this.buildr.control(''),
     loose: this.buildr.control(''),
     state: this.buildr.control(true)
-  });
+    });
 
   SaveData() {
     const idValue = this.databankform.get('id')?.value;
@@ -68,6 +69,14 @@ export class DataBankModalComponent implements OnInit {
       state: this.databankform.get('state')?.value || true,
     };
     this.service.Update(dataToSave).subscribe(res => {
+      this.closepopup();
+    });
+  }
+
+  removeData(){
+    const idValue = this.databankform.get('id')?.value;
+    const _id = idValue ? parseInt(idValue, 10) : 0;
+    this.service.Cancel(idValue).subscribe(res => {
       this.closepopup();
     });
   }

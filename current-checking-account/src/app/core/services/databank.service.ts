@@ -29,7 +29,7 @@ export class DataBankService {
   }
 
   Create(data:DataBankModel){
-    return this.http.put(USR_API + 'create', data);
+    return this.http.post(USR_API + 'create', data);
   }
 
   Update(data:DataBankModel){
@@ -37,8 +37,11 @@ export class DataBankService {
   }
 
   Delete(id:any): Observable<DataBankModel[]> {
-      return this.http.get<DataBankModel[]>(USR_API + 'get-byid/'+id, httpOptions);
+      return this.http.delete<DataBankModel[]>(USR_API + 'delete/'+id, httpOptions);
   }
 
+  Cancel(id:any): Observable<DataBankModel[]> {
+    return this.http.put<DataBankModel[]>(USR_API + 'cancel/'+id, httpOptions);
+}
 
 }

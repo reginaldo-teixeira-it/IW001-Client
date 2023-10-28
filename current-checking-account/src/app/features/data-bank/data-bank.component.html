@@ -56,7 +56,7 @@
               <button (click)="update(element.id)" mat-icon-button color="primary" matTooltip="Edit" aria-label="Example icon button with a home icon">
                 <mat-icon>edit_note</mat-icon>
               </button>
-              <button mat-icon-button color="warn" matTooltip="Cancel" aria-label="Example icon button with a menu icon">
+              <button (click)="delete(element.id)" mat-icon-button color="warn" matTooltip="Cancel" aria-label="Example icon button with a menu icon">
                 <mat-icon>cancel</mat-icon>
               </button>
               <!-- <button mat-icon-button color="warn" matTooltip="Remove" aria-label="Example icon button with a menu icon">

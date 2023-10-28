@@ -51,6 +51,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { CoreModule } from './core/core.module';
 import { DataBankModalComponent } from './features/modal/data-bank-modal/data-bank-modal.component';
+import { ConfirmDialogComponent } from './features/modal/confirm-dialog/confirm-dialog.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -74,7 +75,8 @@ export const MY_FORMATS = {
     ToolsComponent,
     AboutComponent,
     DataBankModalComponent,
-    DataBankModalComponent
+    DataBankModalComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CoreModule,

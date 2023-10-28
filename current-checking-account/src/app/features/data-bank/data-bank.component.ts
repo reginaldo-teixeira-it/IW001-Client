@@ -73,7 +73,6 @@ export class DataBankComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.databankList); // Atualize a dataSource
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.pagination;
-      console.log(data);
     });
   }
 
@@ -83,11 +82,14 @@ export class DataBankComponent implements OnInit {
   }
 
   update(id: any) {
-    console.log('Id Recebido '+id);
-    this.OpenModal(id, 'Edit', DataBankModalComponent);
+    this.OpenModalForm(id, 'Edit', DataBankModalComponent);
   }
 
-  OpenModal(id: any, title: any,component:any) {
+  delete(id: any) {
+    this.OpenModalForm(id, 'Cancel', DataBankModalComponent);
+  }
+
+  OpenModalForm(id: any, title: any,component:any) {
     var _popup = this.dialog.open(component, {
       width: '40%',
       enterAnimationDuration: '150ms',

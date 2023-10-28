@@ -59,7 +59,12 @@
 
       <mat-nav-list>
         <!-- <h3 mat-subheader>Principal</h3> -->
-
+        <a class="menu-item" mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active">
+          <mat-icon mat-list-icon>
+            dashboard
+          </mat-icon>
+          <p class="menu-item" mat-line> Dashboard </p>
+        </a>
         <a class="menu-item" mat-list-item [routerLink]="['/home']" routerLinkActive="active" style="margin-top: 3%;">
           <mat-icon mat-list-icon>
             home
@@ -74,12 +79,7 @@
           <p class="menu-item" mat-line> Extrato </p>
         </a>
 
-        <a class="menu-item" mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active">
-          <mat-icon mat-list-icon>
-            dashboard
-          </mat-icon>
-          <p class="menu-item" mat-line> Dashboard </p>
-        </a>
+
         <mat-divider></mat-divider><br>
         <!-- <h3 mat-subheader>Controle de Acessos</h3> -->
         <a class="menu-item" mat-list-item [routerLink]="['/users']" routerLinkActive="active">

@@ -21,14 +21,18 @@
       <mat-label>Avulso</mat-label>
       <input matInput formControlName="loose">
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Státus</mat-label>
-      <input matInput formControlName="state">
+    <mat-form-field *ngIf="inputdata.title === 'Edit'">
+      <mat-label>Status</mat-label>
+      <mat-select matInput formControlName="state">
+        <mat-option value="true">Ativo</mat-option>
+        <mat-option value="false">Cancelado</mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
-    <button mat-raised-button type="submit" color="primary">Save</button>
-    <a (click)="closepopup()" mat-raised-button color="warn">Close</a>
-    <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
+
+    <button mat-raised-button type="submit" color="primary" *ngIf="inputdata.title === 'Edit'">Save</button>
+    <a (click)="removeData()" mat-raised-button color="warn" *ngIf="inputdata.title === 'Cancel'">Cancel</a>
+    <a (click)="closepopup()" mat-raised-button color="Accent">Close</a>
   </div>
 </form>
