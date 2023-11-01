@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,7 +39,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { ThemePalette } from '@angular/material/core';
 import { DataBankComponent } from './features/data-bank/data-bank.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
@@ -48,20 +47,33 @@ import { HomeComponent } from './features/home/home.component';
 import { ToolsComponent } from './features/tools/tools.component';
 import { AboutComponent } from './features/about/about.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { CoreModule } from './core/core.module';
 import { DataBankModalComponent } from './features/modal/data-bank-modal/data-bank-modal.component';
 import { ConfirmDialogComponent } from './features/modal/confirm-dialog/confirm-dialog.component';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt);
+import { WjInputModule } from '@grapecity/wijmo.angular2.input';
+import { InputDateComponent } from './component/input-date/input-date.component';
+import { InputTextComponent } from './component/input-text/input-text.component';
+import { InputCurrenceComponent } from './component/input-currence/input-currence.component';
+import { InputMaskModule } from '@ngneat/input-mask';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD MMM YYYY',
+    currenceInput: '###.###.##'
   },
   display: {
     dateInput: 'DD MMM YYYY',
     monthYearLabel: 'MMM YYYY',
     dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY'
+    monthYearA11yLabel: 'MMMM YYYY',
+    currenceInput:'0.000,00'
   },
   template:'deep-purple-amber'
 };
@@ -76,7 +88,10 @@ export const MY_FORMATS = {
     AboutComponent,
     DataBankModalComponent,
     DataBankModalComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    InputDateComponent,
+    InputTextComponent,
+    InputCurrenceComponent
   ],
   imports: [
     CoreModule,
@@ -94,7 +109,10 @@ export const MY_FORMATS = {
     MatAutocompleteModule, MatTableModule, MatDialogModule, MatTabsModule,
     MatTooltipModule, MatSelectModule, MatPaginatorModule, MatChipsModule,
     MatButtonToggleModule, MatSlideToggleModule, MatBadgeModule, MatCheckboxModule,
-    MatExpansionModule, DragDropModule, MatSortModule,MatMenuModule
+    MatExpansionModule, DragDropModule, MatSortModule,MatMenuModule,
+    WjInputModule,
+    InputMaskModule,
+    NgxSpinnerModule,
 
   ],
     exports: [
@@ -106,11 +124,19 @@ export const MY_FORMATS = {
     MatTooltipModule, MatSelectModule, MatPaginatorModule, MatChipsModule,
     MatButtonToggleModule, MatSlideToggleModule, MatBadgeModule, MatCheckboxModule,
     MatExpansionModule,DragDropModule, MatSortModule,
-    MatFormFieldModule,MatRadioModule,MatSliderModule,MatGridListModule,MatStepperModule
+    MatFormFieldModule,MatRadioModule,MatSliderModule,MatGridListModule,MatStepperModule,InputDateComponent
   ],
   providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'fill' },
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt-BR'
+    }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

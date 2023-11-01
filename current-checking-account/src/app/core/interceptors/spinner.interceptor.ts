@@ -11,6 +11,7 @@ import { SpinnerService } from './../services/spinner.service';
 
 @Injectable()
 export class SpinnerInterceptor implements HttpInterceptor {
+    [x: string]: any;
 
     constructor(private spinnerService: SpinnerService) { }
 

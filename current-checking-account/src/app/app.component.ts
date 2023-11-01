@@ -18,8 +18,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit{
 
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
-     private media: MediaMatcher,
-     public spinnerService: SpinnerService)
+    private media: MediaMatcher,
+    public spinnerService: SpinnerService)
   {
 
     this.mobileQuery = this.media.matchMedia('(max-width: 1000px)');

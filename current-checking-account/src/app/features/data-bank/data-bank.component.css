@@ -22,3 +22,7 @@ th{
   background-color: black !important;
   color: white;
 }
+
+.hidden-column {
+  display: none;
+}

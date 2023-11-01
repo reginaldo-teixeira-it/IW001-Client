@@ -5,35 +5,18 @@ import { Title } from '@angular/platform-browser';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import {MatIconModule} from '@angular/material/icon';
 
+
 // Models
-import { DataBankModel } from '../../core/models';
+import { CurrentAccountStatementModel } from '../../core/models';
 import { Observable } from 'rxjs';
 import { DataBankService } from 'src/app/core/services/databank.service';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { DataBankModalComponent } from '../modal/data-bank-modal/data-bank-modal.component';
-// export interface DataBankElement {
-//   id: number;
-//   description: string;
-//   startdate: string;
-//   value: number;
-//   loose: string;
-//   state: string;
-// }
-// const ELEMENT_DATA: DataBankElement[] = [
-//   { id: 1, description: 'Compra no supermercado', startdate: '2023-10-25', value: 50.55, loose: '---', state: 'true' },
-//   { id: 2, description: 'Aluguel', startdate: '2023-10-20', value: 1317.57, loose: '---', state: 'true' },
-//   { id: 3, description: 'Restaurante', startdate: '2023-10-15', value: 75.23, loose: '---', state: 'true' }
-// ];
-
-
-// this.dataBankService.getAll().subscribe((data: DataBankModel[]) => {
-//   this.databankList = data; // Atribuir os dados retornados ao objeto
-//   this.dataSource = new MatTableDataSource(this.databankList); // Atualize a dataSource
-//   this.dataSource.sort = this.sort;
-//   console.log(data);
-// });
+import { SpinnerInterceptor } from '../../core/interceptors/spinner.interceptor';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SpinnerService } from '../../core/services/spinner.service';
 
 @Component({
   selector: 'app-data-bank',
@@ -43,32 +26,40 @@ import { DataBankModalComponent } from '../modal/data-bank-modal/data-bank-modal
 
 export class DataBankComponent implements OnInit {
   displayedColumns: string[] = ['id', 'description', 'startdate', 'value', 'loose', 'state','action'];
-  dataSource = new MatTableDataSource<DataBankModel>([]);
+  dataSource = new MatTableDataSource<CurrentAccountStatementModel>([]);
+  isHiddenColumn: boolean = true;
 
   @ViewChild(MatPaginator) pagination !:MatPaginator;
 
   @ViewChild(MatSort, { static: true })
   sort: MatSort = new MatSort;
-  databankList: DataBankModel[] = [];
+  databankList: CurrentAccountStatementModel[] = [];
 
   constructor(
     private dialog: MatDialog,
     private titleService: Title,
     private notificationService: NotificationService,
     private dataBankService: DataBankService,
+    private spinner : SpinnerService
   ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('IW001 - Data Bank');
     this.dataSource.sort = this.sort;
+    this.spinner.show();
+
     this.loaddatabank();
+
+
     setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
       this.notificationService.openSnackBar('IW001 - Data Bank Welcome!');
-    });
+    }, 5000);
   }
 
   loaddatabank() {
-    this.dataBankService.getAll().subscribe((data: DataBankModel[]) => {
+    this.dataBankService.getAll().subscribe((data: CurrentAccountStatementModel[]) => {
       this.databankList = data; // Atribuir os dados retornados ao objeto
       this.dataSource = new MatTableDataSource(this.databankList); // Atualize a dataSource
       this.dataSource.sort = this.sort;
@@ -79,6 +70,10 @@ export class DataBankComponent implements OnInit {
   SearchFilter(data:Event){
     const value=(data.target as HTMLInputElement).value;
     this.dataSource.filter=value;
+  }
+
+  addStartement(){
+    this.OpenModalForm(0, 'Add',DataBankModalComponent);
   }
 
   update(id: any) {

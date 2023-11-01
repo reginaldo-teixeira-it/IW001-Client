@@ -17,3 +17,11 @@ mat-card{
 button{
   margin: 2px;
 }
+
+.disabled-input {
+  pointer-events: none;
+}
+
+.hidden-column {
+  display: none;
+}

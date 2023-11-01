@@ -1,25 +1,36 @@
 <form [formGroup]="databankform" (ngSubmit)="SaveData()">
   <h1 mat-dialog-title>{{inputdata.title}}</h1>
   <div mat-dialog-content>
-    <mat-form-field>
+    <mat-form-field *ngIf="inputdata.title != 'Add'">
       <mat-label>ID</mat-label>
-      <input formControlName="id" matInput>
+      <input formControlName="id" matInput [disabled]="isDisabled" [readonly]="isDisabled" [ngClass]="{'disabled-input': isDisabled}">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Description</mat-label>
       <input formControlName="description" matInput>
     </mat-form-field>
-    <mat-form-field>
+    <!-- <mat-form-field>
       <mat-label>Start Date</mat-label>
-      <input matInput formControlName="startdate">
+      <input matInput formControlName="startdate" input-mask="99/99/9999">
+    </mat-form-field> -->
+    <!-- <app-input-date></app-input-date> -->
+    <!-- <app-input-date [startDateValue]="databankform.get('startdate').value || ''"></app-input-date> -->
+    <!-- <app-input-date [startDateValue]="databankform.get('startdate').value"></app-input-date> -->
+    <!-- <app-input-date [StartDate]="startdate" ></app-input-date> -->
+    <mat-form-field>
+      <mat-label>Data</mat-label>
+      <input matInput formControlName="startdate" input-mask="999.999.999,99">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Valor</mat-label>
-      <input matInput formControlName="value">
+      <input matInput formControlName="value" input-mask="999.999.999,99">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Avulso</mat-label>
-      <input matInput formControlName="loose">
+      <mat-select matInput formControlName="loose">
+        <mat-option value="true">Avulso</mat-option>
+        <mat-option value="false">Não Avulso</mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field *ngIf="inputdata.title === 'Edit'">
       <mat-label>Status</mat-label>
@@ -30,8 +41,7 @@
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
-
-    <button mat-raised-button type="submit" color="primary" *ngIf="inputdata.title === 'Edit'">Save</button>
+    <button mat-raised-button type="submit" color="primary" *ngIf="inputdata.title === 'Edit'||inputdata.title === 'Add'">Save</button>
     <a (click)="removeData()" mat-raised-button color="warn" *ngIf="inputdata.title === 'Cancel'">Cancel</a>
     <a (click)="closepopup()" mat-raised-button color="Accent">Close</a>
   </div>

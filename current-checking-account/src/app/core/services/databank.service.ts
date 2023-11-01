@@ -2,14 +2,16 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { of, EMPTY, Observable } from 'rxjs'
 import { delay, map } from 'rxjs/operators';
-import { DataBankModel } from '../models/databank';
+import { CurrentAccountStatementModel } from '../models/CurrentAccountStatementModel';
 
 const DEV = 'https://localhost:44312/v1/startement/';
 const PRD = 'https://iw001-api.azurewebsites.net/v1/startement/';
 const USR_API = DEV;
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  }),
 };
 
 @Injectable({
@@ -20,28 +22,31 @@ export class DataBankService {
   constructor(private http: HttpClient,@Inject('LOCALSTORAGE') private localStorage: Storage) {
   }
 
-  getAll(): Observable<DataBankModel[]> {
-    return this.http.get<DataBankModel[]>(USR_API + 'get-all', httpOptions);
+  getAll(): Observable<CurrentAccountStatementModel[]> {
+    return this.http.get<CurrentAccountStatementModel[]>(USR_API + 'get-all', httpOptions);
   }
 
-  getByID(id:any): Observable<DataBankModel[]> {
-    return this.http.get<DataBankModel[]>(USR_API + 'get-byid/'+id, httpOptions);
+  getByID(id:any): Observable<CurrentAccountStatementModel[]> {
+    return this.http.get<CurrentAccountStatementModel[]>(USR_API + 'get-byid/'+id, httpOptions);
   }
 
-  Create(data:DataBankModel){
-    return this.http.post(USR_API + 'create', data);
+  Create(data: CurrentAccountStatementModel): Observable<CurrentAccountStatementModel[]> {
+    const body = JSON.stringify(data);
+    
+    return this.http.post<CurrentAccountStatementModel[]>(`${USR_API}create`, body, httpOptions);
   }
 
-  Update(data:DataBankModel){
-    return this.http.put(USR_API + 'update', data);
+  Update(data: CurrentAccountStatementModel): Observable<CurrentAccountStatementModel[]> {
+    const body = JSON.stringify(data);
+    return this.http.post<CurrentAccountStatementModel[]>(`${USR_API}update`, body, httpOptions);
   }
 
-  Delete(id:any): Observable<DataBankModel[]> {
-      return this.http.delete<DataBankModel[]>(USR_API + 'delete/'+id, httpOptions);
+  Delete(id:any): Observable<CurrentAccountStatementModel[]> {
+      return this.http.delete<CurrentAccountStatementModel[]>(USR_API + 'delete/'+id, httpOptions);
   }
 
-  Cancel(id:any): Observable<DataBankModel[]> {
-    return this.http.put<DataBankModel[]>(USR_API + 'cancel/'+id, httpOptions);
+  Cancel(id:any): Observable<CurrentAccountStatementModel[]> {
+    return this.http.put<CurrentAccountStatementModel[]>(USR_API + 'cancel/'+id, httpOptions);
 }
 
 }

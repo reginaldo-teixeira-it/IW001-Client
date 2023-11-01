@@ -1,1 +1,1 @@
-export * from './databank';
+export * from './CurrentAccountStatementModel';
