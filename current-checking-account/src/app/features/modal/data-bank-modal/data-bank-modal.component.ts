@@ -16,16 +16,30 @@ export class DataBankModalComponent implements OnInit {
   editdata: any;
   isDisabled = true;
   closemessage = 'closed using directive'
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref: MatDialogRef<DataBankModalComponent>, private buildr: FormBuilder,
-    private service: DataBankService) {
-  }
+  databankform!: FormGroup;
+  constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public data: any,
+    private ref: MatDialogRef<DataBankModalComponent>,
+    private buildr: FormBuilder,
+    private service: DataBankService
+    ){}
 
   ngOnInit(): void {
+
+    this.databankform = this.buildr.group({
+      id: [''],
+      description: [''],
+      startdate: [''],
+      value: [''],
+      loose: [false],
+      state: [false],
+    });
+
     this.inputdata = this.data;
-    if (this.inputdata.id > 0) {
-      console.log('Id na Modal ' + this.inputdata.id)
+    if (this.inputdata.id > 0)
       this.setmodalData(this.inputdata.id)
-    }
+
   }
 
   setmodalData(id: any) {
@@ -40,24 +54,12 @@ export class DataBankModalComponent implements OnInit {
         loose: this.editdata.loose.toString(),
         state: this.editdata.state.toString(),
       })
-
     });
-
-
   }
 
   closepopup() {
     this.ref.close('Closed using function');
   }
-
-  databankform = this.buildr.group({
-    id: this.buildr.control(''),
-    description: this.buildr.control(''),
-    startdate: this.buildr.control(''),
-    value: this.buildr.control(''),
-    loose: this.buildr.control(false),
-    state: this.buildr.control(true)
-  });
 
   SaveData() {
 
@@ -76,46 +78,34 @@ export class DataBankModalComponent implements OnInit {
 
     const formMetodh = this.inputdata.title;
 
-    console.log('formMetodh: ' + formMetodh);
-    console.log('Id: ' + _id);
-    console.log('description: ' + description);
-    console.log('startDate: ' + formatarDataHora(startDate));
-    console.log('value: ' + value);
-    console.log('Loose: ' + looseValue);
-    console.log('State: ' + stateValue);
+    // console.log('formMetodh: ' + formMetodh);
+    // console.log('Id: ' + _id);
+    // console.log('description: ' + description);
+    // console.log('startDate: ' + formatarDataHora(startDate));
+    // console.log('value: ' + value);
+    // console.log('Loose: ' + looseValue);
+    // console.log('State: ' + stateValue);
 
     const dataToSave: CurrentAccountStatementModel = {
       id: _id,
       description: this.databankform.get('description')?.value || '',
       startdate: startDate,
       value: value,
-      loose: (looseValue == true? true:false),
-      state: (stateValue == true? true:false),
+      loose: JSON.parse(looseValue),
+      state: JSON.parse(stateValue),
     };
 
     console.log('dataToSave > ' + JSON.stringify(dataToSave));
     switch (formMetodh) {
       case "Add":
-        {
-          this.service.Create(dataToSave).subscribe(res => {
-            this.closepopup();
-          });
-        }
+          this.service.Create(dataToSave).subscribe(() => this.closepopup());
         break;
         case "Edit":
-          {
-            this.service.Update(dataToSave).subscribe(res => {
-              this.closepopup();
-            });
-          }
+          this.service.Update(dataToSave).subscribe(() => this.closepopup());
         break;
         case "Cancel":
-          {
-            if (_id > 0) {
-              this.service.Cancel(dataToSave).subscribe(res => {
-                this.closepopup();
-              });
-            }
+          if (dataToSave.id > 0) {
+            this.service.Cancel(dataToSave).subscribe(() => this.closepopup());
           }
         break;
       default:

@@ -38,7 +38,7 @@
       <input matInput formControlName="value" input-mask="999.999.999,99" [ngStyle]="getValueColor()">
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Avulso</mat-label>
+      <mat-label>Tipo de Lançamento</mat-label>
       <mat-select matInput formControlName="loose">
         <mat-option value="true">Avulso</mat-option>
         <mat-option value="false">Não Avulso</mat-option>
@@ -48,8 +48,8 @@
     <mat-form-field *ngIf="inputdata.title === 'Edit'">
       <mat-label>Status</mat-label>
       <mat-select matInput formControlName="state">
-        <mat-option value=true>Ativo</mat-option>
-        <mat-option value=false>Cancelado</mat-option>
+        <mat-option value="true">Válido</mat-option>
+        <mat-option value="false">Cancelado</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
