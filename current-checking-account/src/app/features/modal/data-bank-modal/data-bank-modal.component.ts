@@ -40,7 +40,7 @@ export class DataBankModalComponent implements OnInit {
         loose: this.editdata.loose.toString(),
         state: this.editdata.state.toString(),
       })
-      console.log('Data : ' + this.editdata.startDate);
+
     });
 
 
@@ -60,6 +60,7 @@ export class DataBankModalComponent implements OnInit {
   });
 
   SaveData() {
+
     const idValue = this.databankform.get('id')?.value;
     const _id = idValue ? parseInt(idValue, 10) : 0;
 
@@ -67,15 +68,11 @@ export class DataBankModalComponent implements OnInit {
 
     const startdateValue = this.databankform.get('startdate')?.value || '';
     const startDate = startdateValue ? new Date(startdateValue) : new Date();
-    //const startDateIn = formatarDataHora(startDate);
 
     const value = parseFloat(this.databankform.get('value')?.value || '0.00')
 
     const looseValue = this.databankform.get('loose')?.value;
-    const Loose = looseValue !== null ? looseValue : false;
-
     const stateValue = this.databankform.get('state')?.value;
-    const State = stateValue !== null ? stateValue : false;
 
     const formMetodh = this.inputdata.title;
 
@@ -84,16 +81,16 @@ export class DataBankModalComponent implements OnInit {
     console.log('description: ' + description);
     console.log('startDate: ' + formatarDataHora(startDate));
     console.log('value: ' + value);
-    console.log('Loose: ' + Loose);
-    console.log('State: ' + State);
+    console.log('Loose: ' + looseValue);
+    console.log('State: ' + stateValue);
 
     const dataToSave: CurrentAccountStatementModel = {
       id: _id,
       description: this.databankform.get('description')?.value || '',
       startdate: startDate,
       value: value,
-      loose: Loose || false,
-      state: State || false,
+      loose: (looseValue == true? true:false),
+      state: (stateValue == true? true:false),
     };
 
     console.log('dataToSave > ' + JSON.stringify(dataToSave));
@@ -133,6 +130,13 @@ export class DataBankModalComponent implements OnInit {
       this.closepopup();
     });
   }
+
+  getValueColor() {
+    const value = parseFloat(this.databankform.get('value')?.value || '0.00')
+    const color = value >= 0 ? '#14b8b2' : '#ff0008';
+    return { color: color };
+  }
+
 
 }
 

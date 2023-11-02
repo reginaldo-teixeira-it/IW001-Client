@@ -17,13 +17,25 @@
     <!-- <app-input-date [startDateValue]="databankform.get('startdate').value || ''"></app-input-date> -->
     <!-- <app-input-date [startDateValue]="databankform.get('startdate').value"></app-input-date> -->
     <!-- <app-input-date [StartDate]="startdate" ></app-input-date> -->
-    <mat-form-field>
+
+    <!-- <mat-form-field>
       <mat-label>Data</mat-label>
       <input matInput formControlName="startdate" input-mask="999.999.999,99">
+    </mat-form-field> -->
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="startdate">
+      <mat-datepicker-toggle matIconSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+
+
     <mat-form-field>
       <mat-label>Valor</mat-label>
-      <input matInput formControlName="value" input-mask="999.999.999,99">
+      <input matInput formControlName="value" input-mask="999.999.999,99" [ngStyle]="getValueColor()">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Avulso</mat-label>
@@ -32,11 +44,12 @@
         <mat-option value="false">Não Avulso</mat-option>
       </mat-select>
     </mat-form-field>
+
     <mat-form-field *ngIf="inputdata.title === 'Edit'">
       <mat-label>Status</mat-label>
       <mat-select matInput formControlName="state">
-        <mat-option value="true">Ativo</mat-option>
-        <mat-option value="false">Cancelado</mat-option>
+        <mat-option value=true>Ativo</mat-option>
+        <mat-option value=false>Cancelado</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

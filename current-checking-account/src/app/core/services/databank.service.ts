@@ -6,7 +6,7 @@ import { CurrentAccountStatementModel } from '../models/CurrentAccountStatementM
 
 const DEV = 'https://localhost:44312/v1/startement/';
 const PRD = 'https://iw001-api.azurewebsites.net/v1/startement/';
-const USR_API = DEV;
+const USR_API = PRD;
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -31,14 +31,13 @@ export class DataBankService {
   }
 
   Create(data: CurrentAccountStatementModel): Observable<CurrentAccountStatementModel[]> {
-    const body = JSON.stringify(data);
-    
-    return this.http.post<CurrentAccountStatementModel[]>(`${USR_API}create`, body, httpOptions);
+    return this.http.post<CurrentAccountStatementModel[]>(`${USR_API}create`, data, httpOptions);
   }
 
   Update(data: CurrentAccountStatementModel): Observable<CurrentAccountStatementModel[]> {
     const body = JSON.stringify(data);
-    return this.http.post<CurrentAccountStatementModel[]>(`${USR_API}update`, body, httpOptions);
+    console.log('dataServices :'+body);
+    return this.http.put<CurrentAccountStatementModel[]>(`${USR_API}update`, data, httpOptions);
   }
 
   Delete(id:any): Observable<CurrentAccountStatementModel[]> {

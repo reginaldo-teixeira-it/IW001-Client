@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoggerModule } from 'ngx-logger';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -61,7 +61,8 @@ import { InputTextComponent } from './component/input-text/input-text.component'
 import { InputCurrenceComponent } from './component/input-currence/input-currence.component';
 import { InputMaskModule } from '@ngneat/input-mask';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { DataBankInterceptor } from './core/interceptors/databank.interceptos';
+import {MatNativeDateModule} from '@angular/material/core';
 
 export const MY_FORMATS = {
   parse: {
@@ -110,10 +111,7 @@ export const MY_FORMATS = {
     MatTooltipModule, MatSelectModule, MatPaginatorModule, MatChipsModule,
     MatButtonToggleModule, MatSlideToggleModule, MatBadgeModule, MatCheckboxModule,
     MatExpansionModule, DragDropModule, MatSortModule,MatMenuModule,
-    WjInputModule,
-    InputMaskModule,
-    NgxSpinnerModule,
-
+    WjInputModule,InputMaskModule,NgxSpinnerModule,MatIconModule,MatNativeDateModule,MatGridListModule
   ],
     exports: [
     CommonModule,
@@ -134,7 +132,11 @@ export const MY_FORMATS = {
     {
       provide: LOCALE_ID,
       useValue: 'pt-BR'
-    }
+    },    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: DataBankInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

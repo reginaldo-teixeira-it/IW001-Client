@@ -25,7 +25,7 @@ import { SpinnerService } from '../../core/services/spinner.service';
 })
 
 export class DataBankComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'description', 'startdate', 'value', 'loose', 'state','action'];
+  displayedColumns: string[] = ['id', 'description', 'value','startdate', 'loose', 'state','action'];
   dataSource = new MatTableDataSource<CurrentAccountStatementModel>([]);
   isHiddenColumn: boolean = true;
 
@@ -82,6 +82,14 @@ export class DataBankComponent implements OnInit {
 
   delete(id: any) {
     this.OpenModalForm(id, 'Cancel', DataBankModalComponent);
+  }
+
+  filter(){
+
+  }
+
+  filterRangeData(){
+
   }
 
   OpenModalForm(id: any, title: any,component:any) {
