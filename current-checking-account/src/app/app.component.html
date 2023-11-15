@@ -7,9 +7,9 @@
       <mat-icon>menu</mat-icon>
     </button>
 
-    <a class="navbar-brand" [routerLink]="['/home']" matTooltip="Home">
+    <a class="navbar-brand" [routerLink]="['/data-bank']" matTooltip="Home">
       <h1>
-        IW001 - <i class="fas fa-tachometer-slowest    "></i>
+        Data Bank <i class="fas fa-tachometer-slowest    "></i>
       </h1>
     </a>
 
@@ -59,38 +59,38 @@
 
       <mat-nav-list>
         <!-- <h3 mat-subheader>Principal</h3> -->
-        <a class="menu-item" mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active">
+        <!-- <a class="menu-item" mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active">
           <mat-icon mat-list-icon>
             dashboard
           </mat-icon>
           <p class="menu-item" mat-line> Dashboard </p>
-        </a>
-        <a class="menu-item" mat-list-item [routerLink]="['/home']" routerLinkActive="active" style="margin-top: 3%;">
+        </a> -->
+        <!-- <a class="menu-item" mat-list-item [routerLink]="['/home']" routerLinkActive="active" style="margin-top: 3%;">
           <mat-icon mat-list-icon>
-            home
+            balance
           </mat-icon>
-          <p class="menu-item" mat-line menu-text> Home </p>
-        </a>
+          <p class="menu-item" mat-line menu-text> Extratos </p>
+        </a> -->
 
         <a class="menu-item" mat-list-item [routerLink]="['/data-bank']" routerLinkActive="active">
           <mat-icon mat-list-icon>
             account_balance
           </mat-icon>
-          <p class="menu-item" mat-line> Extrato </p>
+          <p class="menu-item" mat-line> Cadastros </p>
         </a>
 
 
         <mat-divider></mat-divider><br>
         <!-- <h3 mat-subheader>Controle de Acessos</h3> -->
-        <a class="menu-item" mat-list-item [routerLink]="['/users']" routerLinkActive="active">
+        <!-- <a class="menu-item" mat-list-item [routerLink]="['/users']" routerLinkActive="active">
           <mat-icon mat-list-icon>
             group_add
           </mat-icon>
           <p class="menu-item" mat-line>Usuários </p>
         </a>
-        <mat-divider></mat-divider>
+        <mat-divider></mat-divider> -->
 
-        <h3 mat-subheader>Resources</h3>
+        <!-- <h3 class="menu-item" mat-subheader>Resources</h3> -->
 
         <a class="menu-item" mat-list-item [routerLink]="['/tools']" routerLinkActive="active">
           <mat-icon mat-list-icon>

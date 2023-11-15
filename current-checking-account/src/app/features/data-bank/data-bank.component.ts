@@ -28,7 +28,8 @@ export class DataBankComponent implements OnInit {
   displayedColumns: string[] = ['id', 'description', 'value','startdate', 'loose', 'state','action'];
   dataSource = new MatTableDataSource<CurrentAccountStatementModel>([]);
   isHiddenColumn: boolean = true;
-
+  startDate: string = '';
+  endDate: string = '';
   @ViewChild(MatPaginator) pagination !:MatPaginator;
 
   @ViewChild(MatSort, { static: true })
@@ -68,7 +69,7 @@ export class DataBankComponent implements OnInit {
   }
 
   SearchFilter(data:Event){
-    const value=(data.target as HTMLInputElement).value;
+    const value=(data.target as HTMLInputElement).value.trim().toLowerCase();
     this.dataSource.filter=value;
   }
 
@@ -84,12 +85,30 @@ export class DataBankComponent implements OnInit {
     this.OpenModalForm(id, 'Cancel', DataBankModalComponent);
   }
 
-  filter(){
+  filterRangeData()
+  {
+    const filteredData = this.databankList.filter((item) => {
+      const itemDate = new Date(item['startDate']);
+      const startRange = this.startDate ? new Date(this.startDate) : null;
+      const endRange = this.endDate ? new Date(this.endDate) : null;
 
-  }
+      if (startRange && endRange) {
+        return itemDate >= startRange && itemDate <= endRange;
+      } else if (startRange) {
+        return itemDate >= startRange;
+      } else if (endRange) {
+        return itemDate <= endRange;
+      }
 
-  filterRangeData(){
+      return true;
+    });
 
+    this.dataSource = new MatTableDataSource(filteredData);
+      console.clear();
+      console.log('filteredData :', filteredData);
+      console.log('startDate:', this.startDate);
+      console.log('endDate:', this.endDate);
+      console.log('databankList:', this.databankList);
   }
 
   OpenModalForm(id: any, title: any,component:any) {
@@ -108,6 +127,5 @@ export class DataBankComponent implements OnInit {
     })
 
   }
-
 
 }

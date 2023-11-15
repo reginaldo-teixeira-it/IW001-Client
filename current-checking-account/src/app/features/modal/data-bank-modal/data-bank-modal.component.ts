@@ -71,20 +71,12 @@ export class DataBankModalComponent implements OnInit {
     const startdateValue = this.databankform.get('startdate')?.value || '';
     const startDate = startdateValue ? new Date(startdateValue) : new Date();
 
-    const value = parseFloat(this.databankform.get('value')?.value || '0.00')
+    const value = parseFloat(this.databankform.get('value')?.value || '0.00');
 
     const looseValue = this.databankform.get('loose')?.value;
     const stateValue = this.databankform.get('state')?.value;
 
     const formMetodh = this.inputdata.title;
-
-    // console.log('formMetodh: ' + formMetodh);
-    // console.log('Id: ' + _id);
-    // console.log('description: ' + description);
-    // console.log('startDate: ' + formatarDataHora(startDate));
-    // console.log('value: ' + value);
-    // console.log('Loose: ' + looseValue);
-    // console.log('State: ' + stateValue);
 
     const dataToSave: CurrentAccountStatementModel = {
       id: _id,

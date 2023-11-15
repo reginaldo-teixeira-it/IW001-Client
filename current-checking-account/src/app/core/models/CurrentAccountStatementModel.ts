@@ -1,4 +1,5 @@
 export class CurrentAccountStatementModel {
+  [x: string]: any;
   id: number;
   description?: string;
   startdate: Date;

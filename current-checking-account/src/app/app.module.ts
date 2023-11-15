@@ -63,6 +63,7 @@ import { InputMaskModule } from '@ngneat/input-mask';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { DataBankInterceptor } from './core/interceptors/databank.interceptos';
 import {MatNativeDateModule} from '@angular/material/core';
+import { ExtractComponent } from './features/extract/extract.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -92,7 +93,8 @@ export const MY_FORMATS = {
     ConfirmDialogComponent,
     InputDateComponent,
     InputTextComponent,
-    InputCurrenceComponent
+    InputCurrenceComponent,
+    ExtractComponent
   ],
   imports: [
     CoreModule,

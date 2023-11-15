@@ -3,7 +3,7 @@
 
     <mat-card>
       <mat-card-content>
-        <h2>Data Bank</h2>
+        <h2>Extrato Bancário</h2>
         <mat-card-header>
           <mat-toolbar color="basic" class="mat-elevation-z8">
             <mat-form-field style="width: 350px;height:70px;padding: 1%;margin-top: 2%;">
@@ -12,13 +12,15 @@
             <mat-form-field style="width: 300px;margin-top: 2%;height:70px;">
               <mat-label>Insira um período</mat-label>
               <mat-date-range-input [rangePicker]="picker">
-                <input matStartDate placeholder="Start date">
-                <input matEndDate placeholder="End date">
+                <!-- <input matStartDate placeholder="Start date">
+                <input matEndDate placeholder="End date"> -->
+                <input matStartDate [(ngModel)]="startDate" placeholder="Start date">
+                <input matEndDate [(ngModel)]="endDate" placeholder="End date">
               </mat-date-range-input>
               <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-date-range-picker #picker></mat-date-range-picker>
             </mat-form-field>
-            <button (click)="filter()" style="margin-top: 9px;padding-inline-start: 1%;width: 155px;height: 72%;" mat-raised-button color="primary">Filtrar período</button>
+            <button (click)="filterRangeData()" style="margin-top: 9px;padding-inline-start: 1%;width: 155px;height: 72%;" mat-raised-button color="primary">Filtrar período</button>
             <button (click)="addStartement()" style="margin-top: 9px;width: 155px;height: 72%;" mat-raised-button color="primary">Cadastrar (+)</button>
           </mat-toolbar>
         </mat-card-header>
