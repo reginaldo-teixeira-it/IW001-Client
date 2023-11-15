@@ -6,7 +6,7 @@ import { CurrentAccountStatementModel } from '../models/CurrentAccountStatementM
 
 const DEV = 'https://localhost:44312/v1/startement/';
 const PRD = 'https://iw001-api.azurewebsites.net/v1/startement/';
-const USR_API = DEV;
+const USR_API = PRD;
 
 const httpOptions = {
   headers: new HttpHeaders({
