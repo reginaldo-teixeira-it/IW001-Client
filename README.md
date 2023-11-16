@@ -1,5 +1,6 @@
 # IW001-Client
-Client - Teste de listagem de dados - Angular CLI, SPA, .Net6
+Client - Teste de listagem de dados - Angular CLI
+
 ![LOGO](/docs/Client.png "LOGO")
 
 #Aplicação publicada
